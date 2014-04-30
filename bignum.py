@@ -60,6 +60,6 @@ class BigNum:
             OpenSSL.BN_free( self.bn )
         
     def __str__(self):
-        return "BigNum<%X>" % self.get_value()
+        return "BigNum<0x%X>" % self.get_value()
 
     __repr__ = __str__

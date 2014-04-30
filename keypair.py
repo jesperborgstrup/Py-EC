@@ -64,6 +64,6 @@ class KeyPair:
             del priv_key
             
     def __str__(self):
-        return "KeyPair<Private:%X, Public:%s>" % ( self.private_key, self.public_key )
+        return "KeyPair<Private:0x%X, Public:%s>" % ( self.private_key, self.public_key )
 
     __repr__ = __str__
