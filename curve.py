@@ -68,7 +68,7 @@ class Curve:
             self.b = self.curve[1]
             self.f = lambda x: x**3 + self.a*x + self.b
         elif self.field[0] == '42.134.72.206.61.1.2': # Characteristic two field
-            self.field_type = 'characteristic-two'
+            self.field_type = 'power-of-two'
             self.m = self.field[1][0]
             # Maybe bitlength below is not correct..?
             self.bitlength = self.m + 1
@@ -87,7 +87,7 @@ class Curve:
         self.G = ec_point.Point( self, openssl_point=OpenSSL.EC_GROUP_get0_generator( self.os_group ) )
         
     def hash_to_field(self, in_str):
-        return int( hashlib.sha512( in_str ).hexdigest()[self.bitlength//4], 16 )
+        return int( hashlib.sha512( in_str ).hexdigest()[:self.bitlength//4], 16 )
     
     def hash_to_point(self, in_str):
         return self.find_point_try_and_increment( self.hash_to_field( in_str ) )
@@ -115,8 +115,8 @@ class Curve:
             if self.b != 0:
                 equation += "%+d" % ( self.b )
             equation += " (mod p)"
-        elif self.field_type == 'characteristic-two':
-            field = "Characteristic two field, f(x): x^%d+%s1" % ( self.m, "".join( map( lambda x: "x^%d+" % x, reversed( self.poly_coeffs ) ) ) )
+        elif self.field_type == 'power-of-two':
+            field = "Power-of-two field, f(x): x^%d+%s1" % ( self.m, "".join( map( lambda x: "x^%d+" % x, reversed( self.poly_coeffs ) ) ) )
             equation = "y^2+xy = x^3"
             if self.a != 0:
                 equation += "%+dx" % ( self.a )
