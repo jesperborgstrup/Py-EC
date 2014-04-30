@@ -106,3 +106,5 @@ class Curve:
                 equation += "%+d" % ( self.b )
             
         return "Curve<Equation: %s, Field: %s>" % ( equation, field )
+        
+    __repr__ = __str__

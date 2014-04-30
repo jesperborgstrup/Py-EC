@@ -91,3 +91,6 @@ class Point:
             
     def __str__(self):
         return "Point<0x%X, 0x%X>" % ( self.x, self.y )
+
+    __repr__ = __str__
+        

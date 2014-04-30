@@ -43,3 +43,5 @@ class BigNum:
         
     def __str__(self):
         return "BigNum<%X>" % self.get_value()
+
+    __repr__ = __str__
