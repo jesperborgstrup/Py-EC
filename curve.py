@@ -106,6 +106,18 @@ class Curve:
             if y != 0:
                 return ec_point.Point( self, x=x, y=y )
                     
+    def __eq__(self, other):
+        if type(other) is type(self):
+            return self.ver == other.ver and \
+                   self.field == other.field and \
+                   self.curve == other.curve and \
+                   self.G_raw == other.G_raw and \
+                   self.order == other.order and \
+                   self.h == other.h
+        return False
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
     def __str__(self):
         if self.field_type == 'prime':
             field = "Prime field, p: 0x%X" % self.p

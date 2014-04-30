@@ -78,6 +78,13 @@ class Point:
         finally:
             del x, y
             
+    def __eq__(self, other):
+        if type(other) is type(self):
+            return self.x == other.x and self.y == other.y
+        return False
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
     def __add__(self, other):
         """
         Add two EC points together
@@ -111,4 +118,3 @@ class Point:
         return "Point<0x%X, 0x%X>" % ( self.x, self.y )
 
     __repr__ = __str__
-        

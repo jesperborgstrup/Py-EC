@@ -63,6 +63,14 @@ class KeyPair:
         finally:
             del priv_key
             
+    def __eq__(self, other):
+        if type(other) is type(self):
+            return self.private_key == other.private_key and \
+                   self.public_key == other.public_key
+        return False
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
     def __str__(self):
         return "KeyPair<Private:0x%X, Public:%s>" % ( self.private_key, self.public_key )
 
